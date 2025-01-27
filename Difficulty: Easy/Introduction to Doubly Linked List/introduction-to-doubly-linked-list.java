@@ -66,23 +66,16 @@ System.out.println("~");
 
 class Solution {
     Node constructDLL(int arr[]) {
-        // arr --> DLL 
-        Node head = null, curr = null, tail = null;
-        if (arr.length == 0) return head; // Since no element exist Null should be the head for empty Linked Lists
-        for(int x : arr) {
-            if (head == null) { // First Element of the array
-                head = new Node(x);
-                tail = head;
-                curr = head;
-                continue;
-            } 
-            curr = new Node(x);
-            curr.prev = tail;
-            tail.next = curr;
-            tail = tail.next;
+        // Converting an Array arr to Doubly Linked Lists
+        if (arr.length == 0) return null;
+        Node head = new Node(arr[0]);
+        Node prev = head;
+        for(int i=1; i<arr.length; i++){
+            Node elem = new Node(arr[i]);
+            elem.prev = prev;
+            prev.next = elem;
+            prev = prev.next;
         }
         return head;
-    
     }
 }
-    
