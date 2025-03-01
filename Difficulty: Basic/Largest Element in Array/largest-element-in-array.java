@@ -51,15 +51,12 @@ class GFG {
 
 
 class Solution {
-    
-    public static int largest(int index,int[] arr) {
-        if (index < 0) return Integer.MIN_VALUE;
-        int largestForN_1 = largest(index-1,arr);
-        return largestForN_1 > arr[index] ? largestForN_1 : arr[index];
-    }
-    
     public static int largest(int[] arr) {
-        // To Check for Large Space Without using Extra Space use Help Function
-        return  largest(arr.length-1, arr);
+        // Finding The largest Element in the Array Iteratively
+        int largestNum = Integer.MIN_VALUE;
+        for (int elem : arr) {
+            if (elem > largestNum) largestNum = elem;
+        }
+        return largestNum;
     }
 }
