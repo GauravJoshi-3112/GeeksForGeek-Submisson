@@ -101,9 +101,9 @@ System.out.println("~");
 // } Driver Code Ends
 
 
-//User function Template for Java
+// User function Template for Java
 
-/* A Binary Tree node 
+/* A Binary Tree node
 
 class Node {
     int data;
@@ -113,34 +113,25 @@ class Node {
         left = right = null;
     }
 } */
-class Solution
-{
-    ArrayList<Integer> inOrderList = new ArrayList<>();
+class Solution {
     // Return a list containing the inorder traversal of the given tree
-    ArrayList<Integer> inOrder(Node root)
-    {
-        if (root == null) return inOrderList;
-        // We will take Help of Stack for In Order traversal
-        Stack <Node> stack = new Stack<>();
-        // manually break the loop if stack become empty
-        // In case of Inorder we will use cursor node 
-        // which help us print element along with stack
-        Node node = root;
-        while (true) {
-            if (node == null) {
-                if (stack.empty()) {
-                    break;
-                }
-                node = stack.pop();
-                inOrderList.add(node.data);
-                node = node.right;
-            } else {
-                stack.push(node);
-                node = node.left;
+    ArrayList<Integer> inOrder(Node root) {
+        // Code
+        ArrayList<Integer> list = new ArrayList<>();
+        Stack<Node> stack = new Stack<>();
+        
+        while(!stack.isEmpty() || root != null) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
             }
+            
+            root = stack.pop();
+            list.add(root.data);
+            
+            root = root.right;
         }
-        return inOrderList;
+        
+        return list;
     }
-    
-    
 }
