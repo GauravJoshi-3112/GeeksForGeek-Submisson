@@ -31,31 +31,21 @@ class GFG {
 
 
 class Solution {
-    // Function to Count number of ways to reach from ith Stair to nth Stair
-    public int [] arr = null;
-    
-    int countWays(int curr, int n) {
-        if (curr >= n) return 0;
-        else if (curr+1 == n) return 1;
-        else if (curr+2 == n) return 2;
-        int left_ways = 0;
-        int right_ways = 0;
-        if (arr[curr+1] != 0) left_ways = arr[curr+1];
-        else {
-            left_ways = countWays(curr+1,n);
-            arr[curr+1] = left_ways;
-        }
-        if (arr[curr+2] != 0) right_ways = arr[curr+2];
-        else {
-            right_ways = countWays(curr+2,n);
-            arr[curr+2] = right_ways;
-        }
-        return left_ways + right_ways;
-    }
-    // Function to count number of ways to reach the nth stair.
     int countWays(int n) {
-        arr = new int[n];
+        
+        if (n <= 2) return n;
         // your code here
-        return countWays(0,n);
+        // To Count number of ways to reach top without using any extra space
+        int fn_stair = 2;
+        int fn_1stair = 1;
+        int fn_2stair = 0;
+        
+        for(int i=3; i<=n; i++) {
+            fn_2stair = fn_1stair;
+            fn_1stair = fn_stair;
+            fn_stair = fn_2stair + fn_1stair;
+        }
+        
+        return fn_stair;
     }
 }
