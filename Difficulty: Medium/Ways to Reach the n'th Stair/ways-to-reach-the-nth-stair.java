@@ -32,20 +32,14 @@ class GFG {
 
 class Solution {
     int countWays(int n) {
-        
-        if (n <= 2) return n;
         // your code here
-        // To Count number of ways to reach top without using any extra space
-        int fn_stair = 2;
-        int fn_1stair = 1;
-        int fn_2stair = 0;
-        
+        if (n <= 2) return n;
+        int curr = 0, prev = 2, pprev = 1;
         for(int i=3; i<=n; i++) {
-            fn_2stair = fn_1stair;
-            fn_1stair = fn_stair;
-            fn_stair = fn_2stair + fn_1stair;
+            curr = prev + pprev;
+            pprev = prev;
+            prev = curr;
         }
-        
-        return fn_stair;
+        return curr;
     }
 }
