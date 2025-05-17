@@ -29,22 +29,28 @@ class GFG {
 
 
 class Solution {
+    
 
-    static Boolean isSubsetSumHelp(int arr[], int sum, int n) {
-        if (sum == 0) return true;
-        if (n < 0) return false;
-        // Not a valid case
-        if (arr[n] > sum) return isSubsetSumHelp(arr, sum, n-1);
-        else {
-            // Case 1 :- Considering the Element
-            if (isSubsetSumHelp(arr, sum-arr[n], n-1)) return true;
-            // Case 2 :- By Not Considering the Current Element
-            if (isSubsetSumHelp(arr, sum, n-1)) return true;
-            return false;
-        }
-    }
     static Boolean isSubsetSum(int arr[], int sum) {
-        // code here
-        return isSubsetSumHelp(arr,sum, arr.length-1);
+        boolean dp [][] = new boolean[arr.length+1][sum+1];
+        
+        // Initializing 
+        // Sum 0 can be formed by every possible case (Empty Subset)
+        for(int i=0; i<=arr.length; i++) dp[i][0] = true;
+        
+        // Traversing and Calculating
+        for(int i=1; i<=arr.length; i++) {
+            for(int j=1; j<=sum; j++) {
+                if (arr[i-1] <= j) {
+                    // Need Choice Diagram
+                    dp[i][j] = dp[i-1][j-arr[i-1]] || dp[i-1][j];
+                } else {
+                    dp[i][j] = dp[i-1][j];
+                }
+            }
+        }
+        
+        return dp[arr.length][sum];
+        
     }
 }
