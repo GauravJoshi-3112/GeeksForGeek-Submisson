@@ -17,25 +17,25 @@ class Node
 */
 
 class Solution {
-    public static ArrayList<ArrayList<Integer>> result;
-    public static void PathsHelp(Node root, List<Integer> path) {
+    
+    
+    public static void PathsHelp(Node root, ArrayList<Integer> path, ArrayList<ArrayList<Integer>> result) {
         if (root == null) return;
-        else if (root.left == null && root.right == null) {
-            ArrayList<Integer> currPath = new ArrayList<>();
-            currPath.addAll(path);
-            currPath.add(root.data);
-            result.add(currPath);
+        
+        path.add(root.data);
+        if (root.left == null && root.right == null) {
+            ArrayList<Integer> list = new ArrayList<>(path);
+            result.add(list);
         } else {
-            path.add(root.data);
-            PathsHelp(root.left, path);
-            PathsHelp(root.right, path);
-            path.remove(path.size()-1);
+            PathsHelp(root.left,path,result);
+            PathsHelp(root.right,path,result);
         }
+        path.remove(path.size()-1);
     }
     public static ArrayList<ArrayList<Integer>> Paths(Node root) {
         // code here
-        result = new ArrayList<>();
-        PathsHelp(root, new ArrayList<>());
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        PathsHelp(root, new ArrayList<>(),result);
         return result;
     }
 }
