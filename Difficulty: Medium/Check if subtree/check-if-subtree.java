@@ -12,17 +12,20 @@
 }*/
 
 class Solution {
-    public static boolean isValidSub(Node T, Node S) {
+    public static boolean identical (Node T, Node S) {
         if (T == null && S == null) return true;
         else if (T == null || S == null) return false;
-        else if (T.data == S.data) return isValidSub(T.left,S.left) && isValidSub(T.right,S.right);
-        else return false;
+        else if (T.data != S.data) return false;
+        boolean leftIdentical = identical(T.left, S.left);
+        if (!leftIdentical) return false;
+        boolean rightIdentical = identical(T.right, S.right);
+        return rightIdentical;
     }
     public static boolean isSubtree(Node T, Node S) {
         // add code here.
         if (S == null) return true;
         if (T == null) return false;
-        if (isValidSub(T, S)) return true;
-        else return isSubtree(T.left, S) || isSubtree(T.right, S);
+        if (identical(T, S)) return true;
+        else  return isSubtree(T.left, S) || isSubtree(T.right, S);
     }
 }
